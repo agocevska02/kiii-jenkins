@@ -20,8 +20,8 @@ pipeline {
                 script {
                     def app = sh(script: 'echo $app', returnStdout: true).trim() // Retrieve app from previous stage
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                        sh "docker push ${app}:${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
-                        sh "docker push ${app}:${env.BRANCH_NAME}-latest"
+                        sh "docker push ${app}:${env.BRANCH_NAME}-${env.BUILD_NUMBER}" // Push with correct tag
+                        sh "docker push ${app}:${env.BRANCH_NAME}-latest" // Push with correct tag
                         // signal the orchestrator that there is a new version
                     }
                 }
