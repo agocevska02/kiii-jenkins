@@ -8,12 +8,11 @@ pipeline {
             }
         }
         stage('Build image') {
+            when {
+                branch 'dev'
+            }
             steps {
                 script {
-                    // Only build the image if changes are on the 'dev' branch
-                    when {
-                        branch 'dev'
-                    }
                     app = docker.build("agocevska/kiii-jenkins")
                 }
             }
